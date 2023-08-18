@@ -4,9 +4,9 @@ import com.google.gson.JsonObject
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-// Массив данных валют
+// Информация о конвертации одних валют в другие
 data class CoinPriceInfoRawData (
     @SerializedName("RAW")
     @Expose
-    private val coinPriceInfJsonObject: JsonObject? = null
+    val coinPriceInfoJsonObject: JsonObject? = null
 )

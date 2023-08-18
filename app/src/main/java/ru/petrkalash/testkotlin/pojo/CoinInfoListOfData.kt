@@ -8,5 +8,5 @@ data class CoinInfoListOfData (
     // Мы получим данные из сети, и по ключу Data придет массив объектов Datum
     @SerializedName("Data")
     @Expose
-    private val data: List<Datum>? = null
+    val data: List<Datum>? = null
 )
