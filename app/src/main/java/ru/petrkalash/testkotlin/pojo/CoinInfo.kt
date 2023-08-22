@@ -2,6 +2,7 @@ package ru.petrkalash.testkotlin.pojo
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import ru.petrkalash.testkotlin.api.ApiFactory.IMG_URL
 
 // Информация о валюте
 data class CoinInfo (
@@ -17,4 +18,8 @@ data class CoinInfo (
     @SerializedName("ImageUrl")
     @Expose
     private val imageUrl: String? = null
-)
+) {
+    fun getFullImageUrl(): String {
+        return IMG_URL + imageUrl;
+    }
+}

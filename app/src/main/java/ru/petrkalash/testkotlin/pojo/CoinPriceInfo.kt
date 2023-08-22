@@ -4,10 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import ru.petrkalash.testkotlin.utils.convertTimestampToTime
 
 // Информация о валюте, в которую мы будем конвертировать
 @Entity(tableName = "full_price_list")
-data class CoinPriceInfo (
+data class CoinPriceInfo(
     @SerializedName("TYPE")
     @Expose
     val type: String?,
@@ -48,4 +49,8 @@ data class CoinPriceInfo (
     @SerializedName("VOLUME24HOUR")
     @Expose
     val volume24hour: Double?,
-)
+    ) {
+    fun getFormattedTime(): String {
+        return convertTimestampToTime(lastupdate)
+    }
+}

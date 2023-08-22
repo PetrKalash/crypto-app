@@ -6,6 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // Создание синглтона для взаимодействия с интерфейсом ApiService
 object ApiFactory {
+    const val IMG_URL = "https://cryptocompare.com"
+
     // Создаем объект Retrofit, который будет уметь реализовывать интерфейс ApiService
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://min-api.cryptocompare.com/data/")
