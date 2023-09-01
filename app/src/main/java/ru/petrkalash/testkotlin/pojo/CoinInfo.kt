@@ -17,9 +17,5 @@ data class CoinInfo (
     private val fullName: String? = null,
     @SerializedName("ImageUrl")
     @Expose
-    private val imageUrl: String? = null
-) {
-    fun getFullImageUrl(): String {
-        return IMG_URL + imageUrl;
-    }
-}
+    val imageUrl: String? = null
+)

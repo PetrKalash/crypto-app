@@ -16,11 +16,13 @@ import java.util.concurrent.TimeUnit
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
     // Экземпляр базы данных
     private val db = AppDatabase.getInstance(application);
+
     // Хранение всех одноразовых файлов в одном месте
     private val compositeDisposable = CompositeDisposable();
 
     // Вывод ТОП самых популярных валют на данный момент
     val priceList = db.coinPriceInfoDao().getPriceList()
+
     // Подробная информация об одной валюте (в качестве параметра
     // принимает валюту, о которой мы хотим получить информацию)
     fun getDetailInfo(fSym: String): LiveData<CoinPriceInfo> {
@@ -35,7 +37,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     // Загрузка данных из сети
     private fun loadData() {
         // Получаем ТОП самых популярных валют
-        val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 5)
+        val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 10)
             // Превращаем список самых популярных валют в одну строку (имена валют через запятую)
             .map { it.data?.map { its -> its.coinInfo?.name }?.joinToString(",").toString() }
             // Загрузка всей информации о валютах (в качестве параметра - полученная в map строка)
@@ -69,7 +71,10 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             val currencyKeys = currencyJson.keySet()
             for (currencyKey in currencyKeys) {
                 // Конвертируем полученный ключ в CoinPriceInfo
-                val priceInfo = Gson().fromJson(currencyJson.getAsJsonObject(currencyKey), CoinPriceInfo::class.java)
+                val priceInfo = Gson().fromJson(
+                    currencyJson.getAsJsonObject(currencyKey),
+                    CoinPriceInfo::class.java
+                )
                 // Добавляем полученный элемент в коллекцию
                 result.add(priceInfo)
             }

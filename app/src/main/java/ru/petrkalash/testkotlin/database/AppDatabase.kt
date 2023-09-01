@@ -13,7 +13,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase {
             synchronized(Any()) {
                 db?.let { return it }
-                val instance = Room.databaseBuilder(context, AppDatabase::class.java, "main.db").build()
+                val instance = Room.databaseBuilder(context, AppDatabase::class.java, "coin_info.db").build()
                 db = instance
                 return instance
             }

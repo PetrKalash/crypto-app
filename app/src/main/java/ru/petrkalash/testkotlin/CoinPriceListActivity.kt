@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import ru.petrkalash.testkotlin.adapters.CoinInfoAdapter
 import ru.petrkalash.testkotlin.databinding.ActivityCoinPriceListBinding
+import ru.petrkalash.testkotlin.pojo.CoinPriceInfo
 
 class CoinPriceListActivity() : AppCompatActivity() {
 
     private lateinit var binding: ActivityCoinPriceListBinding
+
     // Создаем ссылку на ViewModel
     private lateinit var viewModel: CoinViewModel
 
@@ -22,6 +24,16 @@ class CoinPriceListActivity() : AppCompatActivity() {
 
         val adapter = CoinInfoAdapter(this)
         binding.rvCoinPriceList.adapter = adapter
+        adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
+            override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
+                startActivity(
+                    CoinDetailActivity.newIntent(
+                        this@CoinPriceListActivity,
+                        coinPriceInfo.fromSymbol
+                    )
+                )
+            }
+        }
 
         // Создание и запуск ViewModel
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
@@ -29,10 +41,6 @@ class CoinPriceListActivity() : AppCompatActivity() {
         viewModel.priceList.observe(this) {
             // Взаимодействие с адаптером
             adapter.coinInfoList = it
-            Log.d("TEST_COINS", "Success in Activity: $it")
-        }
-        // Информация об одной валюте
-        viewModel.getDetailInfo("BTC").observe(this) {
             Log.d("TEST_COINS", "Success in Activity: $it")
         }
     }

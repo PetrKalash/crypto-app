@@ -3,4 +3,11 @@
     <string name="input_name">Введите имя</string>
     <string name="hello_world">Hello, World!</string>
     <string name="symbols_template">%s / %s</string>
+    <string name="last_update_template">Время последнего обновления: %s</string>
+    <string name="price">Цена:</string>
+    <string name="min_price">Минимум за день:</string>
+    <string name="max_price">Максимум за день:</string>
+    <string name="last_market">Последняя сделка:</string>
+    <string name="update">Обновлено:</string>
+    <string name="slash">/</string>
 </resources>
